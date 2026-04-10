@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
   /* ── SPACE PALETTE ── */
@@ -52,7 +52,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'General Sans', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   background: var(--void);
   color: var(--text);
   line-height: 1.65;
@@ -124,7 +124,7 @@ nav {
   display: flex; flex-direction: column; gap: 0;
 }
 .brand-name {
-  font-family: 'Clash Display', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-weight: 700; font-size: 17px; letter-spacing: -.01em;
   color: var(--text); line-height: 1;
 }
@@ -137,6 +137,7 @@ nav {
 .nav-links { display: flex; gap: 2px; list-style: none; align-items: center; }
 .nav-links a {
   display: block; padding: 7px 14px; border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
   font-size: 13px; font-weight: 500; color: var(--text2);
   text-decoration: none; transition: color .15s, background .15s;
   letter-spacing: .01em;
@@ -162,7 +163,7 @@ nav {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 9px 22px; border-radius: 10px;
   background: var(--orbit); color: #fff;
-  font-family: 'General Sans', sans-serif; font-size: 13px; font-weight: 600;
+  font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 600;
   text-decoration: none; border: none; cursor: pointer;
   transition: all .2s; letter-spacing: .02em; position: relative; overflow: hidden;
 }
@@ -204,7 +205,7 @@ nav {
 
 /* ── TYPOGRAPHY ── */
 h1, h2, h3, h4 {
-  font-family: 'Clash Display', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   letter-spacing: -.02em; line-height: 1.12;
 }
 .gradient-text {
@@ -223,7 +224,7 @@ h1, h2, h3, h4 {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 14px 30px; border-radius: 12px;
   background: var(--orbit); color: #fff;
-  font-family: 'General Sans', sans-serif; font-size: 15px; font-weight: 600;
+  font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 600;
   text-decoration: none; border: none; cursor: pointer;
   transition: all .2s; position: relative; overflow: hidden; letter-spacing: .01em;
 }
@@ -233,7 +234,7 @@ h1, h2, h3, h4 {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 14px 30px; border-radius: 12px;
   background: var(--panel); color: var(--text);
-  font-family: 'General Sans', sans-serif; font-size: 15px; font-weight: 500;
+  font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 500;
   text-decoration: none; border: 1px solid var(--border2); cursor: pointer;
   transition: all .2s; backdrop-filter: blur(10px);
 }
@@ -243,7 +244,7 @@ h1, h2, h3, h4 {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 9px 20px; border-radius: 9px;
   background: var(--panel); color: var(--text2);
-  font-family: 'General Sans', sans-serif; font-size: 13px; font-weight: 500;
+  font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 500;
   text-decoration: none; border: 1px solid var(--border); cursor: pointer;
   transition: all .15s;
 }
@@ -284,7 +285,7 @@ footer {
 }
 .footer-brand p { color: var(--text2); font-size: 14px; line-height: 1.75; margin-top: 18px; max-width: 300px; }
 .footer-col h5 {
-  font-family: 'Clash Display', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 11px; font-weight: 600; letter-spacing: .1em;
   text-transform: uppercase; color: var(--text3); margin-bottom: 18px;
 }
@@ -299,6 +300,16 @@ footer {
 }
 .footer-bottom a { color: var(--text2); text-decoration: none; margin-left: 20px; transition: color .15s; }
 .footer-bottom a:hover { color: var(--orbit); }
+
+/* ── CUSTOM CURSOR ── */
+html {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='12' cy='12' r='9' stroke='%23FF6B2C' stroke-width='1' fill='none' opacity='0.8'/><line x1='12' y1='2' x2='12' y2='6' stroke='%23FF6B2C' stroke-width='1'/><line x1='12' y1='18' x2='12' y2='22' stroke='%23FF6B2C' stroke-width='1'/><line x1='2' y1='12' x2='6' y2='12' stroke='%23FF6B2C' stroke-width='1'/><line x1='18' y1='12' x2='22' y2='12' stroke='%23FF6B2C' stroke-width='1'/><circle cx='12' cy='12' r='2' fill='%23FF6B2C'/></svg>") 12 12, crosshair;
+}
+a, button, [role="button"],
+.btn-primary, .btn-secondary, .btn-ghost, .btn-launch,
+.nav-links a, .footer-col a, label[for], select {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14' r='11' stroke='%233B8BFF' stroke-width='1.2' fill='none' opacity='0.9'/><circle cx='14' cy='14' r='6' stroke='%233B8BFF' stroke-width='0.8' fill='none' opacity='0.4'/><line x1='14' y1='1' x2='14' y2='7' stroke='%233B8BFF' stroke-width='1.2'/><line x1='14' y1='21' x2='14' y2='27' stroke='%233B8BFF' stroke-width='1.2'/><line x1='1' y1='14' x2='7' y2='14' stroke='%233B8BFF' stroke-width='1.2'/><line x1='21' y1='14' x2='27' y2='14' stroke='%233B8BFF' stroke-width='1.2'/><circle cx='14' cy='14' r='2' fill='%233B8BFF'/></svg>") 14 14, pointer;
+}
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 4px; }
