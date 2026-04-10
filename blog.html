@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — OrbitKit | monday.com Dev Notes & Tutorials</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero{padding:calc(var(--nav-h)+90px) 0 72px}
+.page-hero h1{font-size:clamp(38px,5vw,64px);margin-bottom:16px}
+.page-hero p{font-size:17px;color:var(--text2);font-weight:300;max-width:520px}
+
+.blog-layout{display:grid;grid-template-columns:1fr 300px;gap:52px;padding:64px 0 100px}
+
+/* FEATURED POST */
+.feat-post{display:block;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;text-decoration:none;transition:border-color .2s,transform .25s;margin-bottom:28px}
+.feat-post:hover{border-color:var(--border-o);transform:translateY(-3px)}
+.fp-banner{height:200px;display:flex;align-items:center;justify-content:center;font-size:72px;background:linear-gradient(135deg,rgba(255,107,44,.07),rgba(255,208,77,.05));border-bottom:1px solid var(--border)}
+.fp-body{padding:32px}
+.post-cat{display:inline-flex;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.cat-tut{background:var(--orbit-dim);border:1px solid rgba(255,107,44,.22);color:var(--orbit)}
+.cat-rel{background:var(--signal-dim);border:1px solid rgba(0,229,160,.22);color:var(--signal)}
+.cat-dev{background:var(--electric-dim);border:1px solid rgba(59,139,255,.22);color:var(--electric)}
+.cat-tip{background:var(--gold-dim);border:1px solid rgba(255,208,77,.22);color:var(--gold)}
+.fp-body h2{font-size:22px;margin-bottom:10px;color:var(--text)}
+.fp-body>p{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px}
+.post-meta{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:9px}
+.meta-sep{width:3px;height:3px;border-radius:50%;background:var(--text3)}
+
+/* POST GRID */
+.posts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px}
+.post-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;text-decoration:none;transition:border-color .2s,transform .2s}
+.post-card:hover{border-color:var(--border-o);transform:translateY(-3px)}
+.pc-banner{height:110px;display:flex;align-items:center;justify-content:center;font-size:36px;border-bottom:1px solid var(--border)}
+.pc-body{padding:16px}
+.pc-body h3{font-size:14px;font-weight:600;color:var(--text);margin:8px 0 6px;line-height:1.4}
+.pc-body p{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:8px}
+.pc-meta{font-size:11px;color:var(--text3)}
+
+/* SIDEBAR */
+.sw{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin-bottom:18px}
+.sw h4{font-family:'Clash Display',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.nl-wrap{display:flex;flex-direction:column;gap:8px}
+.nl-input{background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:8px;padding:9px 13px;color:var(--text);font-family:'General Sans',sans-serif;font-size:13px;outline:none;transition:border-color .15s}
+.nl-input:focus{border-color:var(--border-o)}
+.nl-input::placeholder{color:var(--text3)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:5px 11px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:11px;color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s}
+.tag:hover{border-color:var(--border-o);color:var(--orbit)}
+.recent-list{list-style:none}
+.recent-list li{border-bottom:1px solid var(--border);padding:10px 0}
+.recent-list li:last-child{border-bottom:none;padding-bottom:0}
+.recent-list a{text-decoration:none;color:var(--text2);font-size:13px;line-height:1.4;transition:color .15s;display:block}
+.recent-list a:hover{color:var(--orbit)}
+.recent-list a span{display:block;font-size:11px;color:var(--text3);margin-top:2px}
+
+@media(max-width:900px){.blog-layout{grid-template-columns:1fr}.sidebar{display:none}.posts-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="universe"></canvas>
+<div class="orbital-grid"></div>
+<div class="amb amb-1"></div><div class="amb amb-2"></div><div class="amb amb-3"></div>
+<nav>
+  <a href="index.html" class="nav-brand"><div class="ok-logo"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/><circle cx="21" cy="21" r="6" fill="url(#pg)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pg" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div></a>
+  <ul class="nav-links"><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="support.html">Support</a></li></ul>
+  <div class="nav-right"><a href="apps.html#orbitkit-bi" class="btn-launch">Install Free →</a></div>
+</nav>
+<div class="content-wrap">
+<section class="page-hero"><div class="container">
+  <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Dev Log</div>
+  <h1 class="fi d1">Signal transmissions<br><span class="gradient-text">from orbit</span></h1>
+  <p class="fi d2">Tutorials, release notes, monday.com dev lessons, and thoughts on building indie apps on the platform. Written by the developer, not a content team.</p>
+</div></section>
+
+<div class="container">
+  <div class="blog-layout">
+    <main>
+      <a href="#" class="feat-post fi">
+        <div class="fp-banner">📊</div>
+        <div class="fp-body">
+          <span class="post-cat cat-tut">Tutorial</span>
+          <h2>Connect monday.com to Power BI in 5 minutes — without OData headaches</h2>
+          <p>The traditional OData approach requires separate auth dialogs, complex credential management, and breaks on every refresh. Here's a better way using OrbitKit BI's tokenized JSON feed URLs — paste one URL, anonymous auth, live data forever.</p>
+          <div class="post-meta"><span>Abhijit · OrbitKit</span><span class="meta-sep"></span><span>April 10, 2026</span><span class="meta-sep"></span><span>8 min read</span></div>
+        </div>
+      </a>
+      <div class="posts-grid">
+        <a href="#" class="post-card fi"><div class="pc-banner" style="background:linear-gradient(135deg,rgba(0,229,160,.06),rgba(59,139,255,.05));">🔐</div><div class="pc-body"><span class="post-cat cat-rel" style="font-size:9px;">Release</span><h3>OrbitKit BI v1.0 — what shipped and why</h3><p>OAuth 2.0, multi-board connectors, column selectors, and why JSON beats OData for Power BI.</p><div class="pc-meta">April 9, 2026 · 5 min</div></div></a>
+        <a href="#" class="post-card fi d1"><div class="pc-banner" style="background:linear-gradient(135deg,rgba(255,107,44,.07),rgba(255,208,77,.04));">🧱</div><div class="pc-body"><span class="post-cat cat-dev" style="font-size:9px;">Dev Notes</span><h3>Why monday.com session tokens can't be used server-side</h3><p>A lesson learned the hard way — the iframe session token is rejected by monday.com's GraphQL API.</p><div class="pc-meta">April 5, 2026 · 6 min</div></div></a>
+        <a href="#" class="post-card fi"><div class="pc-banner" style="background:linear-gradient(135deg,rgba(255,208,77,.06),rgba(255,107,44,.04));">📈</div><div class="pc-body"><span class="post-cat cat-tip" style="font-size:9px;">Tips</span><h3>5 monday.com column types that trip up Power BI</h3><p>Status labels, people, timelines, dropdowns — each needs special handling in Power Query.</p><div class="pc-meta">March 28, 2026 · 7 min</div></div></a>
+        <a href="#" class="post-card fi d1"><div class="pc-banner" style="background:linear-gradient(135deg,rgba(59,139,255,.06),rgba(0,229,160,.04));">🔄</div><div class="pc-body"><span class="post-cat cat-tut" style="font-size:9px;">Tutorial</span><h3>Building a real-time Tableau dashboard with monday.com</h3><p>Step-by-step: install OrbitKit BI, create a connector, paste the WDC URL, build live dashboard.</p><div class="pc-meta">March 20, 2026 · 10 min</div></div></a>
+        <a href="#" class="post-card fi"><div class="pc-banner" style="background:linear-gradient(135deg,rgba(255,107,44,.06),rgba(255,0,110,.03));">🚂</div><div class="pc-body"><span class="post-cat cat-dev" style="font-size:9px;">Dev Notes</span><h3>Deploying a monday.com backend on Railway in 2026</h3><p>MongoDB, Express, OAuth callbacks, env variables — how OrbitKit BI's backend is structured and deployed.</p><div class="pc-meta">March 12, 2026 · 9 min</div></div></a>
+        <a href="#" class="post-card fi d1"><div class="pc-banner" style="background:linear-gradient(135deg,rgba(0,229,160,.05),rgba(59,139,255,.04));">🏗️</div><div class="pc-body"><span class="post-cat cat-dev" style="font-size:9px;">Dev Notes</span><h3>Why I'm building monday.com apps as a solo indie developer</h3><p>On publishing as an individual, the tradeoffs, and why owning everything is the point.</p><div class="pc-meta">March 1, 2026 · 4 min</div></div></a>
+      </div>
+      <div style="text-align:center"><button class="btn-ghost">Load more transmissions</button></div>
+    </main>
+    <aside class="sidebar">
+      <div class="sw">
+        <h4>Signal Boost</h4>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">New posts, release notes, and monday.com BI tips — no noise.</p>
+        <div class="nl-wrap"><input type="email" class="nl-input" placeholder="your@email.com"><button class="btn-primary" style="font-size:13px;padding:10px;">Subscribe →</button></div>
+      </div>
+      <div class="sw">
+        <h4>Topics</h4>
+        <div class="tag-cloud"><a href="#" class="tag">Power BI</a><a href="#" class="tag">Tableau</a><a href="#" class="tag">monday.com</a><a href="#" class="tag">OAuth</a><a href="#" class="tag">GraphQL</a><a href="#" class="tag">Node.js</a><a href="#" class="tag">MongoDB</a><a href="#" class="tag">Indie Dev</a><a href="#" class="tag">Tutorial</a></div>
+      </div>
+      <div class="sw">
+        <h4>Recent Posts</h4>
+        <ul class="recent-list">
+          <li><a href="#">OrbitKit BI v1.0 is live<span>April 9, 2026</span></a></li>
+          <li><a href="#">monday.com session token limits<span>April 5, 2026</span></a></li>
+          <li><a href="#">5 column types that trip Power BI<span>March 28, 2026</span></a></li>
+          <li><a href="#">Deploy on Railway in 2026<span>March 12, 2026</span></a></li>
+        </ul>
+      </div>
+      <div class="sw" style="background:linear-gradient(160deg,rgba(255,107,44,.06),var(--panel));">
+        <h4>Try OrbitKit BI Free</h4>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Live monday.com data in Power BI or Tableau in 5 minutes.</p>
+        <a href="apps.html#orbitkit-bi" class="btn-primary" style="width:100%;justify-content:center;font-size:13px;padding:10px;">Install Free →</a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer><div class="container">
+  <div class="footer-top"><div class="footer-brand"><a href="index.html" class="nav-brand"><div class="ok-logo" style="width:34px;height:34px;"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><circle cx="21" cy="21" r="6" fill="url(#pgf)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pgf" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span></div></a><p>The monday.com toolkit for teams in orbit.</p></div>
+  <div class="footer-col"><h5>Products</h5><ul><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+  <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog.html">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div></div>
+  <div class="footer-bottom"><span>© 2026 OrbitKit · The Ideal Monday Development</span><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Contact</a></div></div>
+</div></footer>
+</div>
+<script src="orbit.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting — OrbitKit | monday.com Consulting & Implementation</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero{padding:calc(var(--nav-h)+90px) 0 80px}
+.page-hero h1{font-size:clamp(40px,5vw,68px);margin-bottom:18px;max-width:760px}
+.page-hero p{font-size:17px;color:var(--text2);max-width:520px;font-weight:300;line-height:1.75}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+
+/* DIFFERENCE STRIP */
+.diff-strip{padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.diff-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.diff-left h2{font-size:clamp(26px,3vw,38px);margin-bottom:14px}
+.diff-left p{font-size:15px;color:var(--text2);line-height:1.8}
+.diff-right{display:flex;flex-direction:column;gap:12px}
+.diff-row{display:flex;align-items:flex-start;gap:16px;padding:14px 18px;border-radius:12px;background:var(--panel);border:1px solid var(--border)}
+.diff-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.diff-row h5{font-size:14px;margin-bottom:4px;color:var(--text)}
+.diff-row p{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* SERVICES */
+.svcs{padding:90px 0}
+.svcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.svc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-xl);padding:36px;position:relative;overflow:hidden;transition:border-color .2s,transform .25s}
+.svc:hover{border-color:var(--border-o);transform:translateY(-4px)}
+.svc::before{content:'';position:absolute;top:0;right:0;width:160px;height:160px;border-radius:50%;opacity:0;transition:opacity .4s}
+.svc:hover::before{opacity:1}
+.sv1::before{background:radial-gradient(circle,rgba(255,107,44,.1) 0%,transparent 70%)}
+.sv2::before{background:radial-gradient(circle,rgba(59,139,255,.08) 0%,transparent 70%)}
+.sv3::before{background:radial-gradient(circle,rgba(0,229,160,.08) 0%,transparent 70%)}
+.sv4::before{background:radial-gradient(circle,rgba(255,208,77,.08) 0%,transparent 70%)}
+.sv5::before{background:radial-gradient(circle,rgba(255,107,44,.07) 0%,transparent 70%)}
+.sv6::before{background:radial-gradient(circle,rgba(59,139,255,.07) 0%,transparent 70%)}
+.svc-icon-wrap{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px}
+.si1{background:var(--orbit-dim);border:1px solid rgba(255,107,44,.2)}
+.si2{background:var(--electric-dim);border:1px solid rgba(59,139,255,.2)}
+.si3{background:var(--signal-dim);border:1px solid rgba(0,229,160,.2)}
+.si4{background:var(--gold-dim);border:1px solid rgba(255,208,77,.2)}
+.svc h3{font-size:19px;margin-bottom:10px}
+.svc p{font-size:13px;color:var(--text2);line-height:1.7}
+.svc-bullets{margin-top:16px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.svc-bullets li{font-size:12px;color:var(--text2);display:flex;align-items:flex-start;gap:8px}
+.svc-bullets li::before{content:'→';color:var(--orbit);flex-shrink:0;font-weight:700}
+
+/* PROCESS */
+.process{padding:90px 0}
+.process-head{text-align:center;margin-bottom:72px}
+.process-head h2{font-size:clamp(28px,3.5vw,46px);margin-bottom:12px}
+.process-steps{max-width:780px;margin:0 auto;position:relative}
+.process-steps::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--orbit) 20%,var(--electric) 80%,transparent)}
+.proc-step{display:flex;gap:36px;margin-bottom:52px;position:relative}
+.proc-step:last-child{margin-bottom:0}
+.psn{flex-shrink:0;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--orbit-lo),var(--orbit));display:flex;align-items:center;justify-content:center;font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:#fff;box-shadow:0 0 24px var(--orbit-glow);z-index:1}
+.psbody{padding-top:10px}
+.psbody h4{font-size:18px;margin-bottom:8px}
+.psbody p{font-size:14px;color:var(--text2);line-height:1.75}
+
+/* PRICING CARDS */
+.cpricing{padding:80px 0}
+.cp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.cp-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-xl);padding:36px;transition:border-color .2s}
+.cp-card:hover{border-color:var(--border-o)}
+.cp-card.featured{border-color:rgba(255,107,44,.3);background:linear-gradient(160deg,rgba(17,17,40,.97),rgba(11,11,26,.98))}
+.cp-tier{font-family:'Clash Display',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.cp-price{font-family:'Clash Display',sans-serif;font-size:42px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1}
+.cp-price.gradient{background:linear-gradient(135deg,var(--orbit),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cp-price span{font-size:20px;font-weight:400;color:var(--text2)}
+.cp-sub{font-size:13px;color:var(--text2);margin-bottom:24px;min-height:40px}
+.cp-sep{height:1px;background:var(--border);margin-bottom:22px}
+.cp-feat{display:flex;align-items:flex-start;gap:9px;margin-bottom:11px;font-size:13px;color:var(--text2)}
+.cpf-ok{color:var(--signal);flex-shrink:0;font-weight:700}
+
+/* CONTACT FORM */
+.contact-sec{padding:80px 0 100px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.contact-intro h2{font-size:32px;margin-bottom:14px}
+.contact-intro p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:24px}
+.note-box{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;font-size:13px;color:var(--text2);line-height:1.7}
+.note-box strong{color:var(--orbit)}
+.ff{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.ff label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+.ff input,.ff select,.ff textarea{background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'General Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s;width:100%}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--border-o)}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--text3)}
+.ff textarea{min-height:110px;resize:vertical}
+.ff select option{background:var(--station)}
+.ff-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+@media(max-width:960px){.diff-inner{grid-template-columns:1fr}.svcs-grid{grid-template-columns:1fr 1fr}.cp-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.ff-row{grid-template-columns:1fr}}
+@media(max-width:600px){.svcs-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="universe"></canvas>
+<div class="orbital-grid"></div>
+<div class="amb amb-1"></div><div class="amb amb-2"></div><div class="amb amb-3"></div>
+<nav>
+  <a href="index.html" class="nav-brand"><div class="ok-logo"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/><circle cx="21" cy="21" r="6" fill="url(#pg)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pg" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div></a>
+  <ul class="nav-links"><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="blog.html">Blog</a></li><li><a href="consulting.html" class="active">Consulting</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="support.html">Support</a></li></ul>
+  <div class="nav-right"><a href="#contact" class="btn-launch">Book a call →</a></div>
+</nav>
+
+<div class="content-wrap">
+<section class="page-hero"><div class="container">
+  <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Consulting</div>
+  <h1 class="fi d1">monday.com consulting<br><span class="gradient-text">that actually ships</span></h1>
+  <p class="fi d2">Board architecture, automation design, BI integration, team onboarding. You get the person who builds the tools — not a reseller reading from a playbook.</p>
+  <div class="hero-btns fi d3">
+    <a href="#contact" class="btn-primary">Start a project →</a>
+    <a href="#services" class="btn-secondary">See what's included</a>
+  </div>
+</div></section>
+
+<!-- THE DIFFERENCE -->
+<section class="diff-strip">
+  <div class="container">
+    <div class="diff-inner">
+      <div class="diff-left fi">
+        <div class="stag" style="display:inline-flex;margin-bottom:20px;"><span class="stag-dot"></span>The OrbitKit difference</div>
+        <h2>You talk to the developer.<br><span class="gradient-text">Every time.</span></h2>
+        <p>Most monday.com consultants are resellers — certified partners who learned the platform in a weekend and outsource execution. OrbitKit consulting is different. I use monday.com daily to run my own work, I've built apps on top of it, and I care deeply about how the platform is actually implemented — not just configured.</p>
+      </div>
+      <div class="diff-right fi d1">
+        <div class="diff-row"><span class="diff-icon">🎯</span><div><h5>Outcome-focused</h5><p>Every project starts with what your team actually needs to accomplish — not what features to enable.</p></div></div>
+        <div class="diff-row"><span class="diff-icon">🔧</span><div><h5>Technical depth</h5><p>I understand the API, the automation engine, and the data model — not just the UI.</p></div></div>
+        <div class="diff-row"><span class="diff-icon">📞</span><div><h5>Direct access</h5><p>You email or call me directly. No account managers, no handoffs to an execution team.</p></div></div>
+        <div class="diff-row"><span class="diff-icon">🚀</span><div><h5>Things actually get built</h5><p>I ship. Boards get built, automations get configured, dashboards go live — not just recommendations.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="svcs" id="services">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="stag-blue stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Service menu</div>
+      <h2 class="fi d1" style="font-size:clamp(28px,3.5vw,46px);">What I do <span class="gradient-text-blue">for you</span></h2>
+    </div>
+    <div class="svcs-grid">
+      <div class="svc sv1 fi"><div class="svc-icon-wrap si1">🗺️</div><h3>Board Architecture</h3><p>Design a monday.com workspace that scales — right board structure, correct column types, subitems vs items, cross-board connections, workspace organization.</p><ul class="svc-bullets"><li>Workspace & board planning</li><li>Column type selection</li><li>Cross-board dependencies</li><li>Dashboard architecture</li></ul></div>
+      <div class="svc sv2 fi d1"><div class="svc-icon-wrap si2">⚡</div><h3>Automation Design</h3><p>Custom automation recipes that handle repetitive work — status-triggered actions, due date workflows, notification chains, and integrations beyond what monday.com's native automations cover.</p><ul class="svc-bullets"><li>Workflow mapping</li><li>Recipe design & build</li><li>Integration setup</li><li>Testing & documentation</li></ul></div>
+      <div class="svc sv3 fi d2"><div class="svc-icon-wrap si3">📊</div><h3>BI Integration</h3><p>Connect your monday.com boards to Power BI or Tableau. Dashboard design, live data feeds, report templates, scheduled refresh setup — the full BI pipeline from monday.com to insight.</p><ul class="svc-bullets"><li>OrbitKit BI setup</li><li>Power BI / Tableau builds</li><li>Dashboard design</li><li>KPI framework</li></ul></div>
+      <div class="svc sv4 fi"><div class="svc-icon-wrap si4">👥</div><h3>Team Onboarding</h3><p>Get your team actually using monday.com — not just having access. Structured onboarding sessions, process documentation, best-practice guides, and follow-up support.</p><ul class="svc-bullets"><li>Onboarding session design</li><li>Process documentation</li><li>Video walkthroughs</li><li>30-day follow-up</li></ul></div>
+      <div class="svc sv5 fi d1"><div class="svc-icon-wrap si1">🔗</div><h3>API & Integrations</h3><p>Custom integrations between monday.com and your other tools — CRM, ERP, Slack, Google Workspace, and more. Using monday.com's GraphQL API and Zapier/Make when needed.</p><ul class="svc-bullets"><li>API integration design</li><li>Zapier / Make flows</li><li>Custom webhooks</li><li>Data sync setup</li></ul></div>
+      <div class="svc sv6 fi d2"><div class="svc-icon-wrap si2">📋</div><h3>Audit & Rescue</h3><p>If your monday.com setup is a mess — duplicated boards, broken automations, confused teams — I'll audit what you have, diagnose the problems, and rebuild it properly.</p><ul class="svc-bullets"><li>Full workspace audit</li><li>Problem diagnosis</li><li>Rebuild roadmap</li><li>Hands-on remediation</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="container">
+    <div class="process-head">
+      <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>How it works</div>
+      <h2 class="fi d1">From kickoff to orbit</h2>
+    </div>
+    <div class="process-steps">
+      <div class="proc-step fi"><div class="psn">1</div><div class="psbody"><h4>Discovery call (30 min, free)</h4><p>We talk through your current setup, what's working, what isn't, and what you want to achieve. No commitment required — I'll tell you honestly if I can help and what it would involve.</p></div></div>
+      <div class="proc-step fi d1"><div class="psn">2</div><div class="psbody"><h4>Scoped proposal</h4><p>I send a clear written proposal: what will be built, the timeline, and the fixed price. No billable hours surprises. You know exactly what you're getting before we start.</p></div></div>
+      <div class="proc-step fi d2"><div class="psn">3</div><div class="psbody"><h4>Build & iterate</h4><p>I build in your monday.com account directly, with regular check-ins. You can see progress in real time and give feedback as we go — not at the end of a sprint.</p></div></div>
+      <div class="proc-step fi d3"><div class="psn">4</div><div class="psbody"><h4>Handover & documentation</h4><p>Every project ends with a handover session, written documentation, and a 30-day window for questions. Your team should be able to maintain and extend everything without me.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT TIERS -->
+<section class="cpricing">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="stag-blue stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Engagement models</div>
+      <h2 class="fi d1" style="font-size:clamp(28px,3.5vw,44px);">Choose your mission type</h2>
+    </div>
+    <div class="cp-grid">
+      <div class="cp-card fi">
+        <div class="cp-tier">Quick Launch</div>
+        <div class="cp-price">Fixed<span>/project</span></div>
+        <p class="cp-sub">Single-scope projects with a clear deliverable — board build, automation setup, or BI integration.</p>
+        <div class="cp-sep"></div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>1–2 week turnaround</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Fixed price, no surprises</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Full documentation</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>14-day support window</div>
+        <a href="#contact" class="btn-secondary" style="display:block;text-align:center;margin-top:24px;">Get a quote</a>
+      </div>
+      <div class="cp-card featured fi d1">
+        <div class="cp-tier">Full Mission</div>
+        <div class="cp-price gradient">Custom<span>/project</span></div>
+        <p class="cp-sub">End-to-end implementation — workspace architecture, automations, BI integration, team onboarding.</p>
+        <div class="cp-sep"></div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Everything in Quick Launch</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Full workspace audit</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Automation design & build</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>BI dashboard setup</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Team onboarding session</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>30-day support window</div>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center;margin-top:24px;">Start a conversation</a>
+      </div>
+      <div class="cp-card fi d2">
+        <div class="cp-tier">Ongoing Orbit</div>
+        <div class="cp-price">Retainer<span>/mo</span></div>
+        <p class="cp-sub">Monthly retained access for teams that need ongoing monday.com support, changes, and improvements.</p>
+        <div class="cp-sep"></div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Priority access & same-day response</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Monthly board reviews</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Unlimited small changes</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>Automation maintenance</div>
+        <div class="cp-feat"><span class="cpf-ok">✓</span>BI report updates</div>
+        <a href="#contact" class="btn-secondary" style="display:block;text-align:center;margin-top:24px;">Inquire about retainer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-intro fi">
+        <div class="stag" style="display:inline-flex;margin-bottom:20px;"><span class="stag-dot"></span>Get in touch</div>
+        <h2>Let's talk about your monday.com</h2>
+        <p>Tell me what you're working with and what you're trying to achieve. First call is always free — no sales pitch, just an honest conversation about whether I can help.</p>
+        <div class="note-box">
+          <strong>⚡ What to include:</strong><br><br>
+          • What tools you're using today with monday.com<br>
+          • The main pain points or goals<br>
+          • Your team size and how long you've been on monday.com<br>
+          • Rough timeline if you have one
+        </div>
+      </div>
+      <div class="fi d1">
+        <div class="ff-row">
+          <div class="ff"><label>Name</label><input type="text" placeholder="Your name"></div>
+          <div class="ff"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+        </div>
+        <div class="ff"><label>Company</label><input type="text" placeholder="Company name (optional)"></div>
+        <div class="ff"><label>Service needed</label>
+          <select><option value="">Select service</option><option>Board Architecture</option><option>Automation Design</option><option>BI Integration (Power BI / Tableau)</option><option>Team Onboarding</option><option>API & Integrations</option><option>Audit & Rescue</option><option>Not sure — let's talk</option></select>
+        </div>
+        <div class="ff"><label>Tell me about your setup</label><textarea placeholder="What does your current monday.com setup look like? What's the main problem or goal?"></textarea></div>
+        <button class="btn-primary" style="width:100%;justify-content:center;">Send mission brief →</button>
+        <p style="font-size:12px;color:var(--text3);margin-top:10px;text-align:center;">Or email: consulting@orbitkit.dev</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container">
+  <div class="footer-top"><div class="footer-brand"><a href="index.html" class="nav-brand"><div class="ok-logo" style="width:34px;height:34px;"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><circle cx="21" cy="21" r="6" fill="url(#pgf)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pgf" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span></div></a><p>The monday.com toolkit for teams in orbit.</p></div>
+  <div class="footer-col"><h5>Products</h5><ul><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+  <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog.html">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div></div>
+  <div class="footer-bottom"><span>© 2026 OrbitKit · The Ideal Monday Development</span><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Contact</a></div></div>
+</div></footer>
+</div>
+<script src="orbit.js"></script>
+</body>
+</html>

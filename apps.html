@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apps — OrbitKit | monday.com Apps</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero{padding:calc(var(--nav-h)+90px) 0 80px;text-align:center}
+.page-hero h1{font-size:clamp(38px,5vw,66px);margin-bottom:16px}
+.page-hero p{font-size:17px;color:var(--text2);max-width:500px;margin:0 auto;font-weight:300}
+
+/* FEATURED APP */
+.feat-section{padding:80px 0}
+.feat-shell{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(17,17,40,.97) 0%,rgba(11,11,26,.98) 100%);
+  border:1px solid var(--border-o);border-radius:28px;
+}
+.feat-shell::before{
+  content:'';position:absolute;top:-150px;right:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,44,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+/* gradient border */
+.feat-shell::after{
+  content:'';position:absolute;inset:-1px;border-radius:28px;padding:1px;
+  background:linear-gradient(135deg,rgba(255,107,44,.5),rgba(255,208,77,.2),transparent 60%);
+  -webkit-mask:linear-gradient(#fff,#fff) content-box,linear-gradient(#fff,#fff);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+.feat-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:0;position:relative;z-index:1}
+.feat-left{padding:60px 56px}
+.feat-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:20px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.22);color:var(--signal);font-size:11px;font-weight:700;letter-spacing:.07em;margin-bottom:24px}
+.feat-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal);animation:blink 2s infinite}
+.feat-icon-lg{width:80px;height:80px;border-radius:22px;background:linear-gradient(135deg,var(--hull),var(--station));border:1px solid rgba(255,107,44,.25);box-shadow:0 0 40px rgba(255,107,44,.12);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:28px}
+.feat-left h2{font-size:clamp(26px,3vw,40px);margin-bottom:14px}
+.feat-left>p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:28px}
+.feat-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.feat-tag{padding:5px 14px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:12px;color:var(--text2)}
+.feat-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Spec panel */
+.feat-right{border-left:1px solid var(--border);padding:52px 44px;background:rgba(2,2,9,.35)}
+.spec-label{font-family:'Clash Display',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:22px}
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:12px}
+.spec-row:last-child{border-bottom:none;padding-bottom:0}
+.sk{font-size:13px;color:var(--text3)}
+.sv{font-size:13px;color:var(--text);text-align:right}
+.sbadge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.sb-o{background:var(--orbit-dim);color:var(--orbit)}
+.sb-b{background:var(--electric-dim);color:var(--electric)}
+.sb-g{background:var(--signal-dim);color:var(--signal)}
+
+/* HOW IT WORKS */
+.hiw{padding:90px 0}
+.hiw-head{text-align:center;margin-bottom:72px}
+.hiw-head h2{font-size:clamp(28px,3.5vw,46px);margin-bottom:12px}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border-o),transparent)}
+.step{text-align:center;padding:32px 20px;border-radius:var(--r-lg);background:var(--panel);border:1px solid var(--border);position:relative}
+.step-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--orbit-lo),var(--orbit));display:flex;align-items:center;justify-content:center;font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:#fff;margin:0 auto 20px;box-shadow:0 0 20px var(--orbit-glow)}
+.step h4{font-size:15px;margin-bottom:8px}
+.step p{font-size:13px;color:var(--text2);line-height:1.65}
+code.inline{background:rgba(255,107,44,.08);border:1px solid rgba(255,107,44,.18);border-radius:4px;padding:2px 7px;font-size:11px;color:var(--orbit);font-family:monospace}
+
+/* FEATURES DEEP */
+.feat-deep{padding:80px 0}
+.fd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.fd-cell{padding:40px 34px;background:rgba(11,11,26,.8);position:relative;transition:background .2s}
+.fd-cell:hover{background:rgba(17,17,40,.95)}
+.fd-cell::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orbit),transparent);opacity:0;transition:opacity .3s}
+.fd-cell:hover::after{opacity:.6}
+.fd-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px}
+.fdi-o{background:var(--orbit-dim);border:1px solid rgba(255,107,44,.18)}
+.fdi-b{background:var(--electric-dim);border:1px solid rgba(59,139,255,.18)}
+.fdi-g{background:var(--signal-dim);border:1px solid rgba(0,229,160,.18)}
+.fd-cell h4{font-size:16px;margin-bottom:8px}
+.fd-cell p{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* COLUMNS */
+.cols-sec{padding:60px 0}
+.col-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.col-chip{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:10px;background:var(--panel);border:1px solid var(--border);font-size:13px;color:var(--text2);transition:border-color .2s,color .2s}
+.col-chip:hover{border-color:var(--border-o);color:var(--orbit)}
+.cdot{width:7px;height:7px;border-radius:50%}
+
+/* ROADMAP */
+.roadmap{padding:80px 0}
+.road-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.road-card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:30px;opacity:.7;position:relative}
+.road-card::after{content:'INCOMING';position:absolute;top:18px;right:18px;padding:4px 11px;border-radius:20px;background:var(--gold-dim);border:1px solid rgba(255,208,77,.2);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.07em}
+.road-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
+.road-card h4{font-size:18px;margin-bottom:8px}
+.road-card p{font-size:13px;color:var(--text2);line-height:1.65}
+
+/* CTA */
+.apps-cta{padding:80px 0}
+.ac-box{background:var(--panel);border:1px solid var(--border-o);border-radius:var(--r-xl);padding:64px;text-align:center}
+.ac-box h2{font-size:36px;margin-bottom:12px}
+.ac-box p{color:var(--text2);margin-bottom:32px}
+
+@media(max-width:900px){
+  .feat-grid{grid-template-columns:1fr}
+  .feat-right{border-left:none;border-top:1px solid var(--border)}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .steps-grid::before{display:none}
+  .fd-grid{grid-template-columns:1fr 1fr}
+  .road-cards{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .feat-left,.feat-right{padding:28px}
+  .steps-grid{grid-template-columns:1fr}
+  .fd-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<canvas id="universe"></canvas>
+<div class="orbital-grid"></div>
+<div class="amb amb-1"></div><div class="amb amb-2"></div><div class="amb amb-3"></div>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="ok-logo"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/><circle cx="21" cy="21" r="6" fill="url(#pg)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pg" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div>
+    <div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="apps.html" class="active">Apps</a></li>
+    <li><a href="templates.html">Templates</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="apps.html#orbitkit-bi" class="btn-launch">Install Free →</a>
+  </div>
+</nav>
+
+<div class="content-wrap">
+<section class="page-hero">
+  <div class="container">
+    <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>App Fleet</div>
+    <h1 class="fi d1">Apps that extend<br><span class="gradient-text">monday.com's orbit</span></h1>
+    <p class="fi d2">Native board view apps that solve one problem really well. No bloat. No enterprise pricing. Just tools that work.</p>
+  </div>
+</section>
+
+<!-- FEATURED APP -->
+<section class="feat-section" id="orbitkit-bi">
+  <div class="container">
+    <div class="feat-shell fi">
+      <div class="feat-grid">
+        <div class="feat-left">
+          <span class="feat-badge">Live Now — v1.0</span>
+          <div class="feat-icon-lg">📊</div>
+          <h2>OrbitKit BI Data Connector</h2>
+          <p>Connect any monday.com board to Power BI or Tableau with a single OAuth click. Live JSON feeds, multi-board support, column-level filters, tokenized URLs — no API token management, ever.</p>
+          <div class="feat-tags">
+            <span class="feat-tag">📊 Power BI</span>
+            <span class="feat-tag">📈 Tableau</span>
+            <span class="feat-tag">🔐 OAuth 2.0</span>
+            <span class="feat-tag">⚡ Live Data</span>
+            <span class="feat-tag">🧩 Multi-Board</span>
+            <span class="feat-tag">🎯 Column Filters</span>
+            <span class="feat-tag">🛡️ AES-256</span>
+          </div>
+          <div class="feat-btns">
+            <a href="https://auth.monday.com/oauth2/authorize?client_id=322c0d4a0119126abbb1a49212706666&response_type=install" class="btn-primary" target="_blank">Install on monday.com ↗</a>
+            <a href="pricing.html" class="btn-secondary">View Pricing</a>
+          </div>
+        </div>
+        <div class="feat-right">
+          <div class="spec-label">Mission Specs</div>
+          <div class="spec-row"><span class="sk">Category</span><span class="sv">BI & Analytics</span></div>
+          <div class="spec-row"><span class="sk">Platform</span><span class="sv">Board View</span></div>
+          <div class="spec-row"><span class="sk">Works with</span><span class="sv"><span class="sbadge sb-o">Power BI</span> <span class="sbadge sb-b">Tableau</span></span></div>
+          <div class="spec-row"><span class="sk">Data refresh</span><span class="sv">Live — no cache</span></div>
+          <div class="spec-row"><span class="sk">Auth</span><span class="sv">OAuth 2.0</span></div>
+          <div class="spec-row"><span class="sk">Free plan</span><span class="sv"><span class="sbadge sb-g">3 connections</span></span></div>
+          <div class="spec-row"><span class="sk">Board data stored</span><span class="sv">Never</span></div>
+          <div class="spec-row"><span class="sk">Encryption</span><span class="sv">AES-256-CBC</span></div>
+          <div class="spec-row"><span class="sk">Version</span><span class="sv">v1.0 — April 2026</span></div>
+          <div class="spec-row"><span class="sk">Developer</span><span class="sv">the-ideal-monday-dev</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw">
+  <div class="container">
+    <div class="hiw-head">
+      <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Setup Sequence</div>
+      <h2 class="fi d1">T‑minus 4 steps to live data</h2>
+      <p class="fi d2" style="color:var(--text2);">From monday.com to Power BI or Tableau in under five minutes.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step fi"><div class="step-num">1</div><h4>Install from marketplace</h4><p>Add OrbitKit BI from the monday.com App Marketplace. One-click OAuth 2.0 — no account creation beyond monday.com.</p></div>
+      <div class="step fi d1"><div class="step-num">2</div><h4>Pick boards & columns</h4><p>Visual wizard: pick workspace, select boards, choose columns, set row filters. No code, no config files.</p></div>
+      <div class="step fi d2"><div class="step-num">3</div><h4>Copy the feed URL</h4><p>Get a tokenized JSON feed URL. Auth token embedded as a query param — no separate dialog ever again.</p></div>
+      <div class="step fi d3"><div class="step-num">4</div><h4>Paste into your BI tool</h4><p><code class="inline">Get Data → Web</code> in Power BI or <code class="inline">Web Data Connector</code> in Tableau. Paste. Live data flows in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP FEATURES -->
+<section class="feat-deep">
+  <div class="container">
+    <div class="stag fi" style="display:inline-flex; margin-bottom:48px;"><span class="stag-dot"></span>Feature manifest</div>
+    <div class="fd-grid">
+      <div class="fd-cell fi"><div class="fd-icon fdi-o">🔐</div><h4>monday.com OAuth 2.0</h4><p>Authorize once. AES-256 encrypted token storage. Never exposed client-side. Revoke anytime from monday.com settings.</p></div>
+      <div class="fd-cell fi d1"><div class="fd-icon fdi-o">⚡</div><h4>Live JSON feed</h4><p>Every BI refresh hits our endpoint which proxies to monday.com's GraphQL API in real time. Zero caching, always current.</p></div>
+      <div class="fd-cell fi d2"><div class="fd-icon fdi-b">🧩</div><h4>Multi-board merge</h4><p>Combine multiple boards into one connector. A <code class="inline">board_name</code> column is added automatically for slicing in your BI tool.</p></div>
+      <div class="fd-cell fi"><div class="fd-icon fdi-g">🎯</div><h4>Visual filter builder</h4><p>Build row-level filters in the wizard UI — contains, equals, greater than, is empty. Applied server-side before data reaches BI.</p></div>
+      <div class="fd-cell fi d1"><div class="fd-icon fdi-o">🔑</div><h4>Tokenized feed URLs</h4><p>Token in query param means Power BI "Get Data → Web" uses Anonymous auth. One URL, no dialogs, no credential management.</p></div>
+      <div class="fd-cell fi d2"><div class="fd-icon fdi-b">📋</div><h4>Connection management</h4><p>My Connections tab: view credentials, regenerate tokens, edit configs, verify OAuth status. Full control in one place.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLUMN TYPES -->
+<section class="cols-sec">
+  <div class="container">
+    <div class="stag-blue stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Data support</div>
+    <h3 class="fi d1" style="font-size:28px;margin-top:0;">Column types supported</h3>
+    <p class="fi d2" style="color:var(--text2);margin-top:8px;margin-bottom:0;">All major monday.com column types normalized into correctly-typed data for your BI tool.</p>
+    <div class="col-chips fi">
+      <div class="col-chip"><span class="cdot" style="background:#60A5FA;box-shadow:0 0 6px #60A5FA"></span>Text & Long Text</div>
+      <div class="col-chip"><span class="cdot" style="background:#F59E0B;box-shadow:0 0 6px #F59E0B"></span>Numbers & Rating</div>
+      <div class="col-chip"><span class="cdot" style="background:var(--signal);box-shadow:0 0 6px var(--signal)"></span>Status Labels</div>
+      <div class="col-chip"><span class="cdot" style="background:var(--orbit);box-shadow:0 0 6px var(--orbit)"></span>People & Assignees</div>
+      <div class="col-chip"><span class="cdot" style="background:#C084FC;box-shadow:0 0 6px #C084FC"></span>Date & Timeline</div>
+      <div class="col-chip"><span class="cdot" style="background:var(--electric);box-shadow:0 0 6px var(--electric)"></span>Dropdown</div>
+      <div class="col-chip"><span class="cdot" style="background:#4ADE80"></span>Checkbox</div>
+      <div class="col-chip"><span class="cdot" style="background:#FCA5A5"></span>Email & Phone</div>
+      <div class="col-chip"><span class="cdot" style="background:#C4B5FD"></span>Link & URL</div>
+      <div class="col-chip"><span class="cdot" style="background:#86EFAC"></span>Formula & Mirror</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap">
+  <div class="container">
+    <div class="stag-blue stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Incoming</div>
+    <h2 class="fi d1" style="font-size:32px;margin-bottom:8px;">Apps on the launchpad</h2>
+    <p class="fi d2" style="color:var(--text2);">Subscribe on the support page to get early access when these launch.</p>
+    <div class="road-cards">
+      <div class="road-card fi">
+        <div class="road-icon" style="background:var(--electric-dim);border:1px solid rgba(59,139,255,.2);">📄</div>
+        <h4>OrbitKit Docs</h4>
+        <p>Generate PDF and Word documents from monday.com boards. Templates, automation recipes, email delivery — inside monday.com natively.</p>
+      </div>
+      <div class="road-card fi d1">
+        <div class="road-icon" style="background:var(--signal-dim);border:1px solid rgba(0,229,160,.2);">🔔</div>
+        <h4>OrbitKit Alerts</h4>
+        <p>Advanced notifications beyond native automations. Slack, Teams, email — triggered by any column value, custom formula, or board event.</p>
+      </div>
+      <div class="road-card fi d2">
+        <div class="road-icon" style="background:var(--gold-dim);border:1px solid rgba(255,208,77,.2);">🗓️</div>
+        <h4>OrbitKit CalSync</h4>
+        <p>Bidirectional sync between monday.com date and timeline columns and Google Calendar, Outlook, or Apple Calendar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="apps-cta">
+  <div class="container">
+    <div class="ac-box fi">
+      <h2>Begin your mission</h2>
+      <p style="color:var(--text2);margin-bottom:32px;">Free plan. 3 connections. No credit card. Five minutes to live data.</p>
+      <a href="https://auth.monday.com/oauth2/authorize?client_id=322c0d4a0119126abbb1a49212706666&response_type=install" class="btn-primary" target="_blank">Install OrbitKit BI Free ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="index.html" class="nav-brand"><div class="ok-logo" style="width:34px;height:34px;"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><circle cx="21" cy="21" r="6" fill="url(#pgf)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pgf" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div></a><p>The monday.com toolkit for teams in orbit.</p></div>
+      <div class="footer-col"><h5>Products</h5><ul><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog.html">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="support.html">Support</a></li></ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 OrbitKit · The Ideal Monday Development</span><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Contact</a></div></div>
+  </div>
+</footer>
+</div>
+<script src="orbit.js"></script>
+</body>
+</html>

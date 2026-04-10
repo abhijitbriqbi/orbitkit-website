@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OrbitKit — The monday.com Toolkit for Teams in Orbit</title>
+<meta name="description" content="Apps, templates, consulting and resources for monday.com teams. Built by an independent monday.com developer who lives inside the platform daily.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: calc(var(--nav-h) + 60px) 0 100px;
+  position: relative;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: 80px; align-items: center;
+}
+
+/* Eyebrow */
+.hero-brow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.brow-tag {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 20px;
+  background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.22);
+  color: var(--signal); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+}
+.brow-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 8px var(--signal); animation: blink 2s infinite; }
+.brow-monday {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 8px;
+  background: var(--panel); border: 1px solid var(--border);
+  font-size: 12px; color: var(--text2); font-weight: 500;
+}
+
+/* Hero title */
+h1.ht {
+  font-size: clamp(44px, 5.5vw, 76px);
+  font-weight: 700; margin-bottom: 28px; letter-spacing: -.03em;
+}
+h1.ht .l1 { display: block; color: var(--text); }
+h1.ht .l2 {
+  display: block;
+  background: linear-gradient(90deg, var(--orbit) 0%, var(--gold) 40%, var(--orbit-hi) 80%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; filter: drop-shadow(0 0 24px rgba(255,107,44,0.3));
+}
+h1.ht .l3 { display: block; color: var(--text3); font-size: .58em; font-weight: 500; margin-top: 6px; letter-spacing: -.01em; }
+
+.hero-desc { font-size: 17px; color: var(--text2); line-height: 1.8; max-width: 500px; margin-bottom: 44px; font-weight: 300; }
+.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 60px; }
+
+/* Stat bar */
+.stat-bar {
+  display: flex; gap: 0;
+  border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  background: var(--panel);
+}
+.stat-item {
+  flex: 1; padding: 18px 22px; text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--orbit), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.stat-item:hover::before { opacity: 1; }
+.stat-val {
+  font-family: 'Clash Display', sans-serif; font-size: 30px; font-weight: 700;
+  color: var(--orbit); display: block; margin-bottom: 4px; line-height: 1;
+}
+.stat-lbl { font-size: 11px; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; font-weight: 500; }
+
+/* ── HERO VISUAL — MISSION CONTROL PANEL ── */
+.hero-visual { position: relative; }
+.mission-panel {
+  background: rgba(11,11,26,0.92);
+  border: 1px solid var(--border-o);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,107,44,.05), 0 40px 100px rgba(0,0,0,.6), 0 0 60px rgba(255,107,44,.06);
+  backdrop-filter: blur(20px);
+  position: relative; z-index: 2;
+}
+.mp-header {
+  background: rgba(2,2,9,0.7); padding: 14px 20px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.mp-dots { display: flex; gap: 6px; }
+.mp-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.mp-dots span:nth-child(1) { background: #FF5F56; }
+.mp-dots span:nth-child(2) { background: #FFBD2E; }
+.mp-dots span:nth-child(3) { background: #27C93F; }
+.mp-title-bar { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text3); font-family: 'Clash Display', sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.mp-title-bar::before { content: '⬡'; color: var(--orbit); font-size: 14px; }
+
+/* Nav tabs */
+.mp-tabs {
+  background: rgba(6,6,15,0.5); padding: 10px 18px;
+  display: flex; gap: 4px; border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.mp-tab {
+  padding: 6px 14px; border-radius: 7px;
+  font-size: 11px; font-weight: 600; color: var(--text3); white-space: nowrap;
+}
+.mp-tab.on { background: var(--orbit-dim); color: var(--orbit); border: 1px solid var(--border-o); }
+
+/* Dashboard grid */
+.mp-body { padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Mini stat cards */
+.mini-stat {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px;
+}
+.ms-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.ms-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; }
+.ms-icon { font-size: 14px; }
+.ms-val { font-family: 'Clash Display', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); }
+.ms-sub { font-size: 10px; color: var(--signal); margin-top: 2px; }
+.ms-sub.warn { color: var(--gold); }
+
+/* Connection list */
+.mp-conn-list { grid-column: span 2; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.mp-conn-head { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 600; color: var(--text2); display: flex; justify-content: space-between; }
+.conn-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.03);
+}
+.conn-row:last-child { border-bottom: none; }
+.cr-left { display: flex; flex-direction: column; gap: 1px; }
+.cr-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.cr-sub  { font-size: 10px; color: var(--text3); }
+.cr-right { display: flex; gap: 5px; align-items: center; }
+.cr-badge {
+  padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700;
+}
+.cb-o { background: var(--orbit-dim); color: var(--orbit); }
+.cb-b { background: var(--electric-dim); color: var(--electric); }
+.cb-g { background: var(--signal-dim); color: var(--signal); }
+
+/* Orbit rings behind panel */
+.ring-wrap { position: absolute; inset: -60px; pointer-events: none; z-index: 1; }
+.ring {
+  position: absolute; top: 50%; left: 50%;
+  border: 1px dashed rgba(255,107,44,0.1);
+  border-radius: 50%; transform: translate(-50%,-50%);
+}
+.ring-a { width: 420px; height: 420px; animation: spin 50s linear infinite; }
+.ring-b { width: 560px; height: 560px; animation: spin 80s linear infinite reverse; border-color: rgba(59,139,255,0.06); }
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+/* Orbit node on ring */
+.rnode {
+  position: absolute; width: 7px; height: 7px; border-radius: 50%;
+  top: 0; left: 50%; margin: -3.5px 0 0 -3.5px;
+  background: var(--orbit); box-shadow: 0 0 10px var(--orbit);
+}
+
+/* ── SERVICES SECTION ── */
+.services { padding: 110px 0; }
+.svc-head { text-align: center; margin-bottom: 80px; }
+.svc-head h2 { font-size: clamp(32px, 4vw, 54px); margin-bottom: 16px; }
+.svc-head p { color: var(--text2); font-size: 17px; max-width: 540px; margin: 0 auto; font-weight: 300; }
+
+/* Big service cards */
+.svc-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.svc-card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-xl); padding: 44px 40px;
+  position: relative; overflow: hidden;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  text-decoration: none;
+}
+.svc-card::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 200px; height: 200px; border-radius: 50%;
+  opacity: 0; transition: opacity .4s;
+}
+.svc-card:hover { border-color: var(--border-o); transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+.svc-card:hover::before { opacity: 1; }
+.svc-card.s1::before { background: radial-gradient(circle, rgba(255,107,44,.12) 0%, transparent 70%); }
+.svc-card.s2::before { background: radial-gradient(circle, rgba(59,139,255,.10) 0%, transparent 70%); }
+.svc-card.s3::before { background: radial-gradient(circle, rgba(0,229,160,.08) 0%, transparent 70%); }
+.svc-card.s4::before { background: radial-gradient(circle, rgba(255,208,77,.09) 0%, transparent 70%); }
+
+.svc-num {
+  font-family: 'Clash Display', sans-serif; font-size: 11px; font-weight: 600;
+  color: var(--text4); letter-spacing: .1em; margin-bottom: 24px; display: block;
+}
+.svc-icon {
+  width: 64px; height: 64px; border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 24px; position: relative;
+}
+.si-o { background: var(--orbit-dim); border: 1px solid rgba(255,107,44,.2); }
+.si-b { background: var(--electric-dim); border: 1px solid rgba(59,139,255,.2); }
+.si-g { background: var(--signal-dim); border: 1px solid rgba(0,229,160,.2); }
+.si-y { background: var(--gold-dim); border: 1px solid rgba(255,208,77,.2); }
+.svc-card h3 { font-size: 24px; margin-bottom: 12px; color: var(--text); }
+.svc-card p { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 28px; }
+.svc-link { font-size: 13px; font-weight: 600; color: var(--orbit); display: flex; align-items: center; gap: 6px; }
+.svc-link:hover { gap: 10px; }
+.svc-card:hover .svc-link { gap: 10px; }
+
+/* Wide card */
+.svc-card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.wide-left {}
+.wide-right {
+  background: rgba(6,6,15,0.7); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 10px;
+}
+.wide-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 10px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--border);
+  font-size: 13px; color: var(--text2);
+}
+.wi-icon { font-size: 18px; width: 32px; text-align: center; }
+.wi-check { margin-left: auto; color: var(--signal); font-size: 14px; font-weight: 700; }
+
+/* ── APPS SECTION ── */
+.apps-sec { padding: 100px 0; }
+.apps-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+.apps-head h2 { font-size: clamp(28px, 3.5vw, 46px); }
+.apps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.app-card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-xl); padding: 32px;
+  text-decoration: none; display: block; position: relative; overflow: hidden;
+  transition: border-color .2s, transform .25s, box-shadow .25s;
+}
+.app-card:hover { border-color: var(--border-o); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.4); }
+.app-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+  background: linear-gradient(transparent, rgba(255,107,44,.04));
+  pointer-events: none; opacity: 0; transition: opacity .3s;
+}
+.app-card:hover::after { opacity: 1; }
+.ac-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.ac-icon {
+  width: 60px; height: 60px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--hull), var(--station));
+  border: 1px solid rgba(255,107,44,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; box-shadow: 0 0 20px rgba(255,107,44,.08);
+}
+.live-tag {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 11px; border-radius: 20px;
+  background: var(--signal-dim); border: 1px solid rgba(0,229,160,.22);
+  color: var(--signal); font-size: 10px; font-weight: 700; letter-spacing: .05em;
+}
+.live-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--signal); animation: blink 2s infinite; }
+.soon-tag {
+  padding: 4px 11px; border-radius: 20px;
+  background: var(--gold-dim); border: 1px solid rgba(255,208,77,.22);
+  color: var(--gold); font-size: 10px; font-weight: 700;
+}
+.app-card h3 { font-size: 20px; margin-bottom: 8px; color: var(--text); }
+.app-card p { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 20px; }
+.app-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.app-tag { padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,.04); border: 1px solid var(--border); font-size: 11px; color: var(--text3); }
+
+/* ── WHY ORBITKIT ── */
+.why { padding: 100px 0; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+.why-cell {
+  padding: 44px 36px;
+  background: rgba(11,11,26,0.7); position: relative;
+  transition: background .2s;
+}
+.why-cell:hover { background: rgba(17,17,40,0.9); }
+.why-cell::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--orbit), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.why-cell:hover::before { opacity: .4; }
+.wc-num { font-family: 'Clash Display', sans-serif; font-size: 42px; font-weight: 700; color: var(--text4); line-height: 1; margin-bottom: 16px; }
+.why-cell h4 { font-size: 17px; margin-bottom: 10px; }
+.why-cell p  { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ── TESTIMONIALS ── */
+.testi-sec { padding: 100px 0; }
+.testi-head { text-align: center; margin-bottom: 64px; }
+.testi-head h2 { font-size: clamp(28px, 3.5vw, 46px); margin-bottom: 10px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.testi-card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 30px; position: relative;
+}
+.tc-quote { font-size: 52px; font-family: 'Clash Display', sans-serif; color: var(--text4); line-height: 1; position: absolute; top: 16px; right: 22px; }
+.tc-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 16px; }
+.tc-text { font-size: 14px; color: var(--text2); line-height: 1.8; margin-bottom: 22px; font-style: italic; }
+.tc-author { display: flex; align-items: center; gap: 12px; }
+.tc-av {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Clash Display', sans-serif; font-size: 13px; font-weight: 700; color: var(--void);
+}
+.av1 { background: linear-gradient(135deg, var(--orbit), var(--gold)); }
+.av2 { background: linear-gradient(135deg, var(--electric), var(--signal)); }
+.av3 { background: linear-gradient(135deg, var(--orbit-hi), var(--orbit-lo)); }
+.tc-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.tc-role { font-size: 12px; color: var(--text3); }
+
+/* ── CTA ── */
+.cta-sec { padding: 100px 0; }
+.cta-inner {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border-o); border-radius: 28px;
+  padding: 96px 64px; text-align: center;
+  background: linear-gradient(160deg, rgba(17,17,40,.96) 0%, rgba(11,11,26,.98) 100%);
+}
+/* Orbital decoration */
+.cta-inner::before {
+  content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 500px;
+  border: 1px dashed rgba(255,107,44,.12); border-radius: 50%;
+  animation: spin 40s linear infinite;
+}
+.cta-inner::after {
+  content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(255,107,44,.1) 0%, transparent 70%);
+}
+.cta-content { position: relative; z-index: 1; }
+.cta-inner h2 { font-size: clamp(30px, 4vw, 52px); margin-bottom: 16px; }
+.cta-inner p { color: var(--text2); font-size: 17px; margin-bottom: 48px; font-weight: 300; }
+.cta-btns { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.cta-note { margin-top: 24px; font-size: 12px; color: var(--text3); }
+.cta-note a { color: var(--text2); text-decoration: none; }
+
+/* ── MONDAY INTEGRATION STRIP ── */
+.monday-strip { padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.ms-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.ms-text h3 { font-size: 22px; margin-bottom: 6px; }
+.ms-text p { color: var(--text2); font-size: 14px; max-width: 400px; }
+.ms-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+.ms-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 10px;
+  background: var(--panel); border: 1px solid var(--border);
+  font-size: 13px; color: var(--text2); font-weight: 500;
+  transition: border-color .2s, color .2s;
+}
+.ms-pill:hover { border-color: var(--border-o); color: var(--orbit); }
+.ms-pill-icon { font-size: 17px; }
+
+@media (max-width: 1040px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
+  .apps-row { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .cta-inner { padding: 56px 28px; }
+  .apps-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .ms-inner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .svc-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Universe canvas -->
+<canvas id="universe"></canvas>
+<div class="orbital-grid"></div>
+<div class="amb amb-1"></div>
+<div class="amb amb-2"></div>
+<div class="amb amb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="ok-logo">
+      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer orbit ring -->
+        <ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/>
+        <!-- Inner ring -->
+        <ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/>
+        <!-- Center planet -->
+        <circle cx="21" cy="21" r="6" fill="url(#planetGrad)"/>
+        <!-- Orbit satellite -->
+        <circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/>
+        <circle cx="38" cy="21" r="2.8" fill="#FF6B2C" opacity="0.4" r="5"/>
+        <!-- Tool cross (wrench symbol) -->
+        <path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+        <defs>
+          <radialGradient id="planetGrad" cx="40%" cy="35%">
+            <stop offset="0%" stop-color="#FF8C54"/>
+            <stop offset="100%" stop-color="#CC4A14"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">Orbit<span class="accent">Kit</span></span>
+      <span class="brand-sub">monday.com toolkit</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="apps.html">Apps</a></li>
+    <li><a href="templates.html">Templates</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      All systems live
+    </div>
+    <a href="apps.html#orbitkit-bi" class="btn-launch">
+      Get Started Free
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div class="content-wrap">
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-brow fi">
+          <span class="brow-tag">Apps live now</span>
+          <span class="brow-monday">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FF3D57"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            monday.com Developer
+          </span>
+        </div>
+        <h1 class="ht fi d1">
+          <span class="l1">The toolkit that</span>
+          <span class="l2">orbits monday.com</span>
+          <span class="l3">apps · templates · consulting · resources</span>
+        </h1>
+        <p class="hero-desc fi d2">
+          Everything a monday.com power user or team needs — built by someone who lives inside the platform daily. Apps that connect your data. Templates that save hours. Consulting that actually ships.
+        </p>
+        <div class="hero-actions fi d3">
+          <a href="apps.html" class="btn-primary">
+            Explore the Kit
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="consulting.html" class="btn-secondary">Work with me</a>
+        </div>
+        <div class="stat-bar fi d4">
+          <div class="stat-item">
+            <span class="stat-val" data-count="1" data-suffix="">1</span>
+            <span class="stat-lbl">App live</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" data-count="2" data-suffix="">2</span>
+            <span class="stat-lbl">BI tools</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" data-count="3" data-suffix="+">3+</span>
+            <span class="stat-lbl">Apps planned</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">∞</span>
+            <span class="stat-lbl">Boards</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MISSION CONTROL PANEL -->
+      <div class="hero-visual fi d2">
+        <div class="ring-wrap">
+          <div class="ring ring-a"><div class="rnode"></div></div>
+          <div class="ring ring-b"></div>
+        </div>
+        <div class="mission-panel">
+          <div class="mp-header">
+            <div class="mp-dots"><span></span><span></span><span></span></div>
+            <div class="mp-title-bar">OrbitKit Mission Control</div>
+          </div>
+          <div class="mp-tabs">
+            <div class="mp-tab on">BI Connector</div>
+            <div class="mp-tab">Templates</div>
+            <div class="mp-tab">Analytics</div>
+            <div class="mp-tab">Alerts</div>
+          </div>
+          <div class="mp-body">
+            <div class="mini-stat">
+              <div class="ms-top"><span class="ms-label">Connections</span><span class="ms-icon">🔗</span></div>
+              <div class="ms-val">3</div>
+              <div class="ms-sub">↑ 2 this week</div>
+            </div>
+            <div class="mini-stat">
+              <div class="ms-top"><span class="ms-label">Data synced</span><span class="ms-icon">⚡</span></div>
+              <div class="ms-val">Live</div>
+              <div class="ms-sub warn">Real-time fetch</div>
+            </div>
+            <div class="mp-conn-list">
+              <div class="mp-conn-head">
+                <span>Active connections</span>
+                <span style="color:var(--signal);">3 nominal</span>
+              </div>
+              <div class="conn-row">
+                <div class="cr-left">
+                  <span class="cr-name">Sales Pipeline → Power BI</span>
+                  <span class="cr-sub">3 boards · synced 2m ago</span>
+                </div>
+                <div class="cr-right">
+                  <span class="cr-badge cb-o">PBI</span>
+                  <span class="cr-badge cb-g">Live</span>
+                </div>
+              </div>
+              <div class="conn-row">
+                <div class="cr-left">
+                  <span class="cr-name">Projects → Tableau</span>
+                  <span class="cr-sub">1 board · synced 14m ago</span>
+                </div>
+                <div class="cr-right">
+                  <span class="cr-badge cb-b">TAB</span>
+                  <span class="cr-badge cb-g">Live</span>
+                </div>
+              </div>
+              <div class="conn-row">
+                <div class="cr-left">
+                  <span class="cr-name">HR → Power BI</span>
+                  <span class="cr-sub">2 boards · synced 1h ago</span>
+                </div>
+                <div class="cr-right">
+                  <span class="cr-badge cb-o">PBI</span>
+                  <span class="cr-badge cb-g">Live</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MONDAY STRIP ── -->
+<section class="monday-strip">
+  <div class="container">
+    <div class="ms-inner">
+      <div class="ms-text">
+        <h3>Built for the monday.com ecosystem</h3>
+        <p>Every tool, template, and service in OrbitKit is designed specifically for monday.com teams — not adapted, not ported. Native.</p>
+      </div>
+      <div class="ms-pills">
+        <div class="ms-pill"><span class="ms-pill-icon">📊</span> Power BI</div>
+        <div class="ms-pill"><span class="ms-pill-icon">📈</span> Tableau</div>
+        <div class="ms-pill"><span class="ms-pill-icon">📋</span> Board Views</div>
+        <div class="ms-pill"><span class="ms-pill-icon">🔗</span> OAuth 2.0</div>
+        <div class="ms-pill"><span class="ms-pill-icon">⚡</span> Automations</div>
+        <div class="ms-pill"><span class="ms-pill-icon">🧩</span> Integrations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services">
+  <div class="container">
+    <div class="svc-head">
+      <div class="stag"><span class="stag-dot"></span>What's in the kit</div>
+      <h2>Every tool you need<br>in one <span class="gradient-text">orbit</span></h2>
+      <p>Apps, templates, consulting, and content — all built around the monday.com platform by someone who uses it every day.</p>
+    </div>
+    <div class="svc-grid">
+      <a href="apps.html" class="svc-card s1 fi glass">
+        <span class="svc-num">01 / APPS</span>
+        <div class="svc-icon si-o">🛰️</div>
+        <h3>monday.com Apps</h3>
+        <p>Native apps that extend monday.com's power. Connect your boards to BI tools, automate complex workflows, and surface data where your team works. First up: OrbitKit BI — live data feeds to Power BI and Tableau.</p>
+        <div class="svc-link">Browse apps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+      <a href="templates.html" class="svc-card s2 fi d1 glass">
+        <span class="svc-num">02 / TEMPLATES</span>
+        <div class="svc-icon si-b">📐</div>
+        <h3>Board Templates</h3>
+        <p>Pre-built monday.com board templates for sales, projects, HR, CRM, and operations. Import in one click, configured and ready to use. No blank-board syndrome. Built for how real teams actually work.</p>
+        <div class="svc-link">Browse templates <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+      <a href="consulting.html" class="svc-card s3 wide fi glass">
+        <div class="wide-left">
+          <span class="svc-num">03 / CONSULTING</span>
+          <div class="svc-icon si-g">🎯</div>
+          <h3>monday.com Consulting</h3>
+          <p>Hands-on consulting for teams that need more than templates. Board architecture, automation design, BI integration, workflow mapping, onboarding. You get the person who built these tools — not a reseller.</p>
+          <div class="svc-link" style="margin-top: 20px;">Start a project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="wide-right">
+          <div class="wide-item"><span class="wi-icon">🗺️</span> Board architecture & structure<span class="wi-check">✓</span></div>
+          <div class="wide-item"><span class="wi-icon">⚡</span> Automation recipe design<span class="wi-check">✓</span></div>
+          <div class="wide-item"><span class="wi-icon">📊</span> BI integration & dashboards<span class="wi-check">✓</span></div>
+          <div class="wide-item"><span class="wi-icon">🔗</span> API & integration setup<span class="wi-check">✓</span></div>
+          <div class="wide-item"><span class="wi-icon">👥</span> Team onboarding & training<span class="wi-check">✓</span></div>
+          <div class="wide-item"><span class="wi-icon">📋</span> Workflow documentation<span class="wi-check">✓</span></div>
+        </div>
+      </a>
+      <a href="blog.html" class="svc-card s4 fi glass">
+        <span class="svc-num">04 / BLOG</span>
+        <div class="svc-icon si-y">📡</div>
+        <h3>monday.com Resources</h3>
+        <p>Tutorials, dev notes, tips, and deep dives on monday.com — Power BI integration, automation tricks, board design patterns, and lessons from building indie apps on the platform.</p>
+        <div class="svc-link">Read the blog <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPS ── -->
+<section class="apps-sec">
+  <div class="container">
+    <div class="apps-head">
+      <div>
+        <div class="stag-green stag fi"><span class="stag-dot"></span>App Fleet</div>
+        <h2 class="fi d1">Apps orbiting monday.com</h2>
+      </div>
+      <a href="apps.html" class="btn-ghost fi d2">View all apps →</a>
+    </div>
+    <div class="apps-row">
+      <a href="apps.html#orbitkit-bi" class="app-card fi">
+        <div class="ac-top">
+          <div class="ac-icon">📊</div>
+          <span class="live-tag">Live v1.0</span>
+        </div>
+        <h3>OrbitKit BI</h3>
+        <p>Connect monday.com boards to Power BI and Tableau with live JSON feeds. OAuth secured, multi-board, column filters, tokenized URLs.</p>
+        <div class="app-tags">
+          <span class="app-tag">Power BI</span>
+          <span class="app-tag">Tableau</span>
+          <span class="app-tag">OAuth 2.0</span>
+          <span class="app-tag">Live Data</span>
+        </div>
+      </a>
+      <div class="app-card fi d1" style="opacity:.65; cursor:default;">
+        <div class="ac-top">
+          <div class="ac-icon" style="border-color:rgba(59,139,255,.18);box-shadow:0 0 20px rgba(59,139,255,.08);">📄</div>
+          <span class="soon-tag">Coming Soon</span>
+        </div>
+        <h3>OrbitKit Docs</h3>
+        <p>Generate PDFs and Word documents from monday.com boards. Templates, automation recipes, email delivery — inside monday.com.</p>
+        <div class="app-tags">
+          <span class="app-tag">PDF</span>
+          <span class="app-tag">Word</span>
+          <span class="app-tag">Automation</span>
+        </div>
+      </div>
+      <div class="app-card fi d2" style="opacity:.65; cursor:default;">
+        <div class="ac-top">
+          <div class="ac-icon" style="border-color:rgba(0,229,160,.18);box-shadow:0 0 20px rgba(0,229,160,.08);">🔔</div>
+          <span class="soon-tag">Coming Soon</span>
+        </div>
+        <h3>OrbitKit Alerts</h3>
+        <p>Advanced notifications for monday.com. Slack, Teams, email — triggered by any column, formula, or custom condition beyond native automations.</p>
+        <div class="app-tags">
+          <span class="app-tag">Slack</span>
+          <span class="app-tag">Teams</span>
+          <span class="app-tag">Email</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY ── -->
+<section class="why">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:72px;">
+      <div class="stag-blue stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Why OrbitKit</div>
+      <h2 class="fi d1" style="font-size:clamp(30px,4vw,50px); margin-top:0;">Built different.<br><span class="gradient-text-blue">By design.</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-cell fi"><div class="wc-num">01</div><h4>Native OAuth — no token hell</h4><p>One-click monday.com authorization. No personal API tokens to copy, rotate, or manage. Long-lived OAuth keeps connections alive.</p></div>
+      <div class="why-cell fi d1"><div class="wc-num">02</div><h4>Live data, never cached</h4><p>Every BI refresh fetches fresh from monday.com's GraphQL API. Your dashboards are always current. Nothing sits stale in a database.</p></div>
+      <div class="why-cell fi d2"><div class="wc-num">03</div><h4>Indie built, indie priced</h4><p>No VC pricing, no enterprise tiers designed to make the free plan useless. Honest pricing from someone who uses monday.com to run their own work.</p></div>
+      <div class="why-cell fi"><div class="wc-num">04</div><h4>Security first</h4><p>AES-256 token encryption. SHA-256 BI token hashing. Your board data never touches our database. No exceptions.</p></div>
+      <div class="why-cell fi d1"><div class="wc-num">05</div><h4>Human support</h4><p>You email the developer who wrote the code. Not a tier-1 agent with a script. Real answers, usually within 24 hours.</p></div>
+      <div class="why-cell fi d2"><div class="wc-num">06</div><h4>Growing toolkit</h4><p>OrbitKit BI is the first of many. Apps, templates, and consulting — all sharing the same platform expertise and design philosophy.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi-sec">
+  <div class="container">
+    <div class="testi-head">
+      <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>From the community</div>
+      <h2 class="fi d1">Teams already in orbit</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fi glass">
+        <div class="tc-quote">"</div>
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Connected our monday.com boards to Power BI in literally 5 minutes. The OAuth flow is seamless — no API tokens, no config files. Just click and it works."</p>
+        <div class="tc-author">
+          <div class="tc-av av1">RK</div>
+          <div><div class="tc-name">Rahul K.</div><div class="tc-role">Operations Manager</div></div>
+        </div>
+      </div>
+      <div class="testi-card fi d1 glass">
+        <div class="tc-quote">"</div>
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"The column selector is the feature I didn't know I needed. We export exactly the fields our analysts need — nothing extra, nothing missing. Power Query actually works now."</p>
+        <div class="tc-author">
+          <div class="tc-av av2">SC</div>
+          <div><div class="tc-name">Sarah C.</div><div class="tc-role">BI Developer</div></div>
+        </div>
+      </div>
+      <div class="testi-card fi d2 glass">
+        <div class="tc-quote">"</div>
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Emailed a question Saturday morning, got a real fix pushed by Sunday afternoon. You can feel this was built by someone who genuinely gives a damn."</p>
+        <div class="tc-author">
+          <div class="tc-av av3">MJ</div>
+          <div><div class="tc-name">Marcus J.</div><div class="tc-role">Freelance Consultant</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-content fi">
+        <div class="stag" style="display:inline-flex; margin-bottom:28px;"><span class="stag-dot"></span>Ready to launch?</div>
+        <h2>Join the orbit.<br><span class="gradient-text">Everything's free to start.</span></h2>
+        <p>No credit card. No trial period. Install OrbitKit BI and have live data in Power BI or Tableau in under 5 minutes.</p>
+        <div class="cta-btns">
+          <a href="apps.html#orbitkit-bi" class="btn-primary">
+            Install OrbitKit BI Free
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="consulting.html" class="btn-secondary">Explore Consulting</a>
+        </div>
+        <p class="cta-note">Questions? <a href="support.html">Email me directly</a> — I reply personally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand" style="margin-bottom:0;">
+          <div class="ok-logo" style="width:36px;height:36px;">
+            <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/>
+              <ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/>
+              <circle cx="21" cy="21" r="6" fill="url(#pg2)"/>
+              <circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/>
+              <path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+              <defs><radialGradient id="pg2" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name" style="font-size:15px;">Orbit<span class="accent">Kit</span></span>
+            <span class="brand-sub">monday.com toolkit</span>
+          </div>
+        </a>
+        <p>The monday.com toolkit for teams in orbit. Apps, templates, consulting, and resources — all built by one independent developer who lives inside monday.com daily.</p>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:18px;padding:6px 14px;border-radius:8px;background:var(--panel);border:1px solid var(--border);width:fit-content;font-size:12px;color:var(--text2);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FF3D57"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          the-ideal-monday-development
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="apps.html">Apps</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="apps.html#orbitkit-bi">OrbitKit BI</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="consulting.html">Consulting</a></li>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="support.html#docs">Documentation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 OrbitKit · The Ideal Monday Development · orbitkit.dev</span>
+      <div>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="orbit.js"></script>
+</body>
+</html>

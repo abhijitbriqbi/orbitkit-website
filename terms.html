@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — OrbitKit</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.legal-wrap{display:grid;grid-template-columns:220px 1fr;gap:64px;padding:calc(var(--nav-h)+60px) 0 100px;align-items:start}
+.legal-sidebar{position:sticky;top:calc(var(--nav-h) + 24px)}
+.ls-title{font-family:'Clash Display',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.ls-nav{list-style:none}
+.ls-nav li{margin-bottom:2px}
+.ls-nav a{display:block;padding:7px 12px;border-radius:8px;color:var(--text2);font-size:13px;text-decoration:none;font-weight:500;transition:all .15s;border-left:2px solid transparent}
+.ls-nav a:hover{color:var(--text);background:var(--panel)}
+.ls-nav a.on{color:var(--orbit);border-left-color:var(--orbit);background:var(--orbit-dim)}
+.ls-meta{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:18px;font-size:13px;color:var(--text3)}
+.ls-meta strong{color:var(--text2);display:block;margin-bottom:2px}
+.legal-content h1{font-size:42px;margin-bottom:10px}
+.subtitle{font-size:15px;color:var(--text2);margin-bottom:48px;line-height:1.6}
+.legal-content h2{font-size:20px;margin:48px 0 13px;padding-top:48px;border-top:1px solid var(--border)}
+.legal-content h2:first-of-type{margin-top:0;border-top:none;padding-top:0}
+.legal-content p{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:13px}
+.legal-content ul{padding-left:18px;margin-bottom:13px}
+.legal-content ul li{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:6px}
+.legal-content strong{color:var(--text)}
+.hl-box{background:rgba(0,229,160,.05);border:1px solid rgba(0,229,160,.2);border-radius:10px;padding:16px 20px;margin:20px 0;font-size:14px;color:var(--text2);line-height:1.75}
+.hl-box strong{color:var(--signal)}
+@media(max-width:900px){.legal-wrap{grid-template-columns:1fr}.legal-sidebar{display:none}}
+</style>
+</head>
+<body>
+<canvas id="universe"></canvas>
+<div class="orbital-grid"></div>
+<div class="amb amb-1"></div><div class="amb amb-2"></div><div class="amb amb-3"></div>
+<nav>
+  <a href="index.html" class="nav-brand"><div class="ok-logo"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/><circle cx="21" cy="21" r="6" fill="url(#pg)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pg" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div></a>
+  <ul class="nav-links"><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="blog.html">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="support.html">Support</a></li></ul>
+  <div class="nav-right"><a href="apps.html#orbitkit-bi" class="btn-launch">Install Free →</a></div>
+</nav>
+<div class="content-wrap"><div class="container">
+  <div class="legal-wrap">
+    <aside class="legal-sidebar">
+      <div class="ls-title">Navigation</div>
+      <ul class="ls-nav">
+        <li><a href="#acceptance" class="on">1. Acceptance</a></li>
+        <li><a href="#service">2. The Service</a></li>
+        <li><a href="#accounts">3. Accounts</a></li>
+        <li><a href="#use">4. Acceptable Use</a></li>
+        <li><a href="#billing">5. Billing</a></li>
+        <li><a href="#data">6. Data & Privacy</a></li>
+        <li><a href="#ip">7. Intellectual Property</a></li>
+        <li><a href="#liability">8. Liability</a></li>
+        <li><a href="#termination">9. Termination</a></li>
+        <li><a href="#changes">10. Changes</a></li>
+        <li><a href="#governing">11. Governing Law</a></li>
+        <li><a href="#contact-t">12. Contact</a></li>
+      </ul>
+      <div class="ls-meta"><strong>Effective</strong>April 9, 2026<strong style="margin-top:8px;">Developer</strong>The Ideal Monday Development</div>
+    </aside>
+    <article class="legal-content">
+      <h1>Terms of Service</h1>
+      <p class="subtitle">Please read before using OrbitKit. By installing or using any OrbitKit app, you agree to be bound by these terms.</p>
+      <div class="hl-box"><strong>Plain English:</strong> Use OrbitKit as intended. Don't abuse it. Your data is yours. Liability is limited as appropriate for an indie operation. We can suspend accounts that violate these terms.</div>
+      <h2 id="acceptance">1. Acceptance of Terms</h2>
+      <p>These Terms govern your use of OrbitKit apps and services ("the Service"), operated by <strong>The Ideal Monday Development</strong>. By installing, accessing, or using any OrbitKit product, you agree to these Terms.</p>
+      <h2 id="service">2. The Service</h2>
+      <p>OrbitKit is a suite of monday.com marketplace applications that extend monday.com functionality. OrbitKit BI enables users to connect monday.com boards to external BI tools via live JSON data feeds. The Service fetches data from monday.com on your behalf and provides it to configured BI tools in real time.</p>
+      <p>The Service is provided "as is" and "as available." We make reasonable efforts to maintain uptime but cannot guarantee 100% availability.</p>
+      <h2 id="accounts">3. Accounts and Authorization</h2>
+      <p>To use OrbitKit apps, you need a valid monday.com account and must authorize via OAuth 2.0. By authorizing, you grant OrbitKit read access to your monday.com boards, workspaces, and user profile. You are responsible for securing your OrbitKit access tokens. You may only use OrbitKit with monday.com accounts you have legitimate access to.</p>
+      <h2 id="use">4. Acceptable Use</h2>
+      <p>You agree not to: access monday.com data you're not authorized to access; reverse-engineer source code; create excessive API requests degrading service for others; resell or sublicense the Service without written permission; circumvent any security mechanisms; use the Service for unlawful purposes.</p>
+      <h2 id="billing">5. Subscription and Billing</h2>
+      <p>OrbitKit currently offers a free tier. Paid plans are coming soon. When launched: subscriptions are billed monthly or annually; you may cancel anytime; 30 days' notice before price changes to existing subscribers.</p>
+      <p><strong>30-day money-back guarantee:</strong> Not satisfied within 30 days of subscribing? Email for a full refund, no questions.</p>
+      <h2 id="data">6. Data and Privacy</h2>
+      <p>Our <a href="privacy.html" style="color:var(--orbit);">Privacy Policy</a> is incorporated into these Terms. <strong>Your data remains yours.</strong> We don't claim ownership of any monday.com data accessed through the Service.</p>
+      <h2 id="ip">7. Intellectual Property</h2>
+      <p>OrbitKit apps, website, codebase, design, and branding are the intellectual property of The Ideal Monday Development. All rights reserved. The monday.com name belongs to monday.com Ltd. OrbitKit is independent and not affiliated with or endorsed by monday.com Ltd., Microsoft (Power BI), or Salesforce (Tableau).</p>
+      <h2 id="liability">8. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, The Ideal Monday Development shall not be liable for any indirect, incidental, special, or consequential damages. Total liability for any claims shall not exceed the amount paid in the 12 months preceding the claim, or $100 USD, whichever is greater.</p>
+      <h2 id="termination">9. Termination</h2>
+      <p>You may terminate by deleting your connections and revoking app authorization from monday.com account settings. We may suspend for Terms violations. Upon termination, your data is deleted within 30 days.</p>
+      <h2 id="changes">10. Changes to Terms</h2>
+      <p>We may update these Terms as the Service evolves. Significant changes will be communicated via the OrbitKit app or email. Continued use after changes constitutes acceptance.</p>
+      <h2 id="governing">11. Governing Law</h2>
+      <p>These Terms are governed by the laws of India. Disputes shall be resolved in courts of competent jurisdiction in Maharashtra, India.</p>
+      <h2 id="contact-t">12. Contact</h2>
+      <p><strong>support@orbitkit.dev</strong><br>The Ideal Monday Development<br>orbitkit.dev</p>
+      <p style="margin-top:48px;font-size:12px;color:var(--text3);padding-top:24px;border-top:1px solid var(--border);">Last updated: April 9, 2026.</p>
+    </article>
+  </div>
+</div></div>
+<footer><div class="container">
+  <div class="footer-top"><div class="footer-brand"><a href="index.html" class="nav-brand"><div class="ok-logo" style="width:34px;height:34px;"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><circle cx="21" cy="21" r="6" fill="url(#pgf)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pgf" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span></div></a><p>The monday.com toolkit for teams in orbit.</p></div>
+  <div class="footer-col"><h5>Products</h5><ul><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+  <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog.html">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div></div>
+  <div class="footer-bottom"><span>© 2026 OrbitKit · The Ideal Monday Development</span><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Contact</a></div></div>
+</div></footer>
+<script src="orbit.js"></script>
+<script>
+const hs=document.querySelectorAll('.legal-content h2[id]'),ls=document.querySelectorAll('.ls-nav a');
+window.addEventListener('scroll',()=>{let c='';hs.forEach(h=>{if(window.scrollY>=h.offsetTop-130)c=h.id});ls.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+c))},{passive:true});
+</script>
+</body>
+</html>

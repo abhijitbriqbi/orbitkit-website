@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Templates — OrbitKit | monday.com Board Templates</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero{padding:calc(var(--nav-h)+90px) 0 72px;text-align:center}
+.page-hero h1{font-size:clamp(38px,5vw,64px);margin-bottom:16px}
+.page-hero p{font-size:17px;color:var(--text2);max-width:520px;margin:0 auto;font-weight:300}
+
+/* COMING SOON HERO */
+.cs-hero{padding:80px 0}
+.cs-box{
+  background:linear-gradient(160deg,rgba(17,17,40,.97),rgba(11,11,26,.98));
+  border:1px solid var(--border-o);border-radius:28px;
+  padding:80px 60px;text-align:center;position:relative;overflow:hidden;
+}
+.cs-box::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse,rgba(255,107,44,.08) 0%,transparent 65%);
+}
+.cs-orbit{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:320px;height:320px;border-radius:50%;
+  border:1px dashed rgba(255,107,44,.12);
+  animation:spin 35s linear infinite;
+}
+.cs-orbit::after{
+  content:'';position:absolute;top:0;left:50%;margin:-5px 0 0 -5px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--orbit);box-shadow:0 0 12px var(--orbit);
+}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cs-content{position:relative;z-index:1}
+.cs-icon{font-size:64px;margin-bottom:24px;display:block}
+.cs-box h2{font-size:clamp(28px,4vw,48px);margin-bottom:16px}
+.cs-box p{color:var(--text2);font-size:16px;max-width:500px;margin:0 auto 36px;font-weight:300;line-height:1.75}
+
+/* EMAIL FORM */
+.waitlist-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:0}
+.wl-input{background:rgba(255,255,255,.06);border:1px solid var(--border2);border-radius:10px;padding:12px 18px;color:var(--text);font-family:'General Sans',sans-serif;font-size:14px;outline:none;width:280px;transition:border-color .15s}
+.wl-input:focus{border-color:var(--border-o)}
+.wl-input::placeholder{color:var(--text3)}
+
+/* PREVIEW CATEGORIES */
+.cats{padding:80px 0}
+.cats-head{text-align:center;margin-bottom:64px}
+.cats-head h2{font-size:clamp(28px,3.5vw,44px);margin-bottom:12px}
+.cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cat-card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:36px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s;
+  cursor:default;
+}
+.cat-card:hover{border-color:var(--border-o);transform:translateY(-4px)}
+.cat-card::before{
+  content:'';position:absolute;top:0;right:0;
+  width:180px;height:180px;border-radius:50%;
+  opacity:0;transition:opacity .4s;
+}
+.cat-card:hover::before{opacity:1}
+.cc1::before{background:radial-gradient(circle,rgba(255,107,44,.1) 0%,transparent 70%)}
+.cc2::before{background:radial-gradient(circle,rgba(59,139,255,.08) 0%,transparent 70%)}
+.cc3::before{background:radial-gradient(circle,rgba(0,229,160,.07) 0%,transparent 70%)}
+.cc4::before{background:radial-gradient(circle,rgba(255,208,77,.08) 0%,transparent 70%)}
+.cc5::before{background:radial-gradient(circle,rgba(192,132,252,.08) 0%,transparent 70%)}
+.cc6::before{background:radial-gradient(circle,rgba(255,107,44,.07) 0%,transparent 70%)}
+.cat-icon{font-size:36px;margin-bottom:20px;display:block}
+.cat-card h3{font-size:20px;margin-bottom:8px}
+.cat-card p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px}
+.cat-count{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:6px}
+.cc-dot{width:5px;height:5px;border-radius:50%;background:var(--orbit)}
+.cat-preview{display:flex;gap:5px;flex-wrap:wrap;margin-top:14px}
+.cp-tag{padding:3px 9px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:11px;color:var(--text3)}
+
+/* FEATURES */
+.tmpl-features{padding:60px 0 80px}
+.tf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tf-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;text-align:center;transition:border-color .2s}
+.tf-card:hover{border-color:var(--border-o)}
+.tf-icon{font-size:28px;margin-bottom:14px;display:block}
+.tf-card h4{font-size:15px;margin-bottom:7px}
+.tf-card p{font-size:13px;color:var(--text2);line-height:1.6}
+
+@media(max-width:900px){.cats-grid{grid-template-columns:1fr 1fr}.tf-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cats-grid{grid-template-columns:1fr}.tf-grid{grid-template-columns:1fr}.cs-box{padding:40px 24px}}
+</style>
+</head>
+<body>
+<canvas id="universe"></canvas>
+<div class="orbital-grid"></div>
+<div class="amb amb-1"></div><div class="amb amb-2"></div><div class="amb amb-3"></div>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="ok-logo"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><ellipse cx="21" cy="21" rx="13" ry="5.5" stroke="#FF6B2C" stroke-width="1" opacity="0.35"/><circle cx="21" cy="21" r="6" fill="url(#pg)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pg" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div>
+    <div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="apps.html">Apps</a></li>
+    <li><a href="templates.html" class="active">Templates</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+  <div class="nav-right"><a href="apps.html#orbitkit-bi" class="btn-launch">Install Free →</a></div>
+</nav>
+
+<div class="content-wrap">
+<section class="page-hero">
+  <div class="container">
+    <div class="stag fi" style="display:inline-flex;"><span class="stag-dot"></span>Templates</div>
+    <h1 class="fi d1">monday.com boards,<br><span class="gradient-text">pre-built for orbit</span></h1>
+    <p class="fi d2">One-click import board templates built for the way real teams work. Pre-configured columns, automations, views, and dashboards — ready to launch.</p>
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section class="cs-hero">
+  <div class="container">
+    <div class="cs-box fi">
+      <div class="cs-orbit"></div>
+      <div class="cs-content">
+        <span class="cs-icon">🚀</span>
+        <div class="stag" style="display:inline-flex;margin-bottom:20px;"><span class="stag-dot"></span>Launch sequence initiated</div>
+        <h2>Templates launching <span class="gradient-text">very soon</span></h2>
+        <p>The first batch of monday.com board templates is in final configuration. Sales CRM, Project Tracker, HR Onboarding, Sprint Board, and more — all wired with automations, dashboards, and best-practice column structures.</p>
+        <div class="waitlist-form">
+          <input type="email" class="wl-input" placeholder="your@email.com">
+          <button class="btn-primary" onclick="this.textContent='✓ You\'re on the list';this.style.background='var(--signal)';this.style.color='var(--void)'">Notify me at launch</button>
+        </div>
+        <p style="font-size:12px;color:var(--text3);margin-top:14px;">No spam. One email when templates go live. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY PREVIEW -->
+<section class="cats">
+  <div class="container">
+    <div class="cats-head">
+      <div class="stag-blue stag fi" style="display:inline-flex;"><span class="stag-dot"></span>What's launching</div>
+      <h2 class="fi d1">Template categories <span class="gradient-text-blue">in orbit</span></h2>
+      <p class="fi d2" style="color:var(--text2);max-width:460px;margin:12px auto 0;font-weight:300;">Pre-built boards for every corner of your organization. Each template ships with columns, automations, views, and dashboards — ready to import and use immediately.</p>
+    </div>
+    <div class="cats-grid">
+      <div class="cat-card cc1 fi">
+        <span class="cat-icon">💼</span>
+        <h3>Sales & CRM</h3>
+        <p>Pipeline management, lead tracking, deal stages, forecasting — wired with automation for follow-up reminders and status updates.</p>
+        <div class="cat-preview">
+          <span class="cp-tag">Sales Pipeline</span>
+          <span class="cp-tag">Lead Tracker</span>
+          <span class="cp-tag">Deal Board</span>
+          <span class="cp-tag">Account CRM</span>
+        </div>
+      </div>
+      <div class="cat-card cc2 fi d1">
+        <span class="cat-icon">📋</span>
+        <h3>Project Management</h3>
+        <p>Sprint boards, project trackers, milestone planning, stakeholder updates — every column type your PM team actually needs.</p>
+        <div class="cat-preview">
+          <span class="cp-tag">Project Tracker</span>
+          <span class="cp-tag">Sprint Board</span>
+          <span class="cp-tag">Milestone Map</span>
+          <span class="cp-tag">Client Portal</span>
+        </div>
+      </div>
+      <div class="cat-card cc3 fi d2">
+        <span class="cat-icon">👥</span>
+        <h3>HR & People Ops</h3>
+        <p>Onboarding checklists, recruitment pipeline, leave tracking, employee directory — built for HR teams who run monday.com daily.</p>
+        <div class="cat-preview">
+          <span class="cp-tag">Onboarding</span>
+          <span class="cp-tag">Recruitment</span>
+          <span class="cp-tag">Leave Tracker</span>
+          <span class="cp-tag">Team Directory</span>
+        </div>
+      </div>
+      <div class="cat-card cc4 fi">
+        <span class="cat-icon">⚙️</span>
+        <h3>Operations</h3>
+        <p>Vendor management, IT requests, procurement, process documentation — for ops teams that run everything through monday.com.</p>
+        <div class="cat-preview">
+          <span class="cp-tag">Vendor Tracker</span>
+          <span class="cp-tag">IT Requests</span>
+          <span class="cp-tag">Procurement</span>
+        </div>
+      </div>
+      <div class="cat-card cc5 fi d1">
+        <span class="cat-icon">📣</span>
+        <h3>Marketing</h3>
+        <p>Campaign planning, content calendar, social media scheduling, event coordination — pre-wired for marketing team workflows.</p>
+        <div class="cat-preview">
+          <span class="cp-tag">Campaign Hub</span>
+          <span class="cp-tag">Content Calendar</span>
+          <span class="cp-tag">Event Planner</span>
+        </div>
+      </div>
+      <div class="cat-card cc6 fi d2">
+        <span class="cat-icon">🔧</span>
+        <h3>Dev & Tech</h3>
+        <p>Bug tracking, feature roadmaps, release planning, deployment checklists — for dev teams using monday.com alongside their code tools.</p>
+        <div class="cat-preview">
+          <span class="cp-tag">Bug Tracker</span>
+          <span class="cp-tag">Roadmap</span>
+          <span class="cp-tag">Release Board</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="tmpl-features">
+  <div class="container">
+    <div class="stag fi" style="display:inline-flex; margin-bottom:40px;"><span class="stag-dot"></span>Every template includes</div>
+    <div class="tf-grid">
+      <div class="tf-card fi"><span class="tf-icon">🗂️</span><h4>Pre-built columns</h4><p>Right column types in the right order. Status, people, date, timeline, formula — all configured.</p></div>
+      <div class="tf-card fi d1"><span class="tf-icon">⚡</span><h4>Automation recipes</h4><p>Status-triggered notifications, due date alerts, assignment automations — built in and ready.</p></div>
+      <div class="tf-card fi d2"><span class="tf-icon">👁️</span><h4>Multiple views</h4><p>Grid, Gantt, Calendar, Kanban, and Timeline views — all set up so your team can switch immediately.</p></div>
+      <div class="tf-card fi d3"><span class="tf-icon">📊</span><h4>Dashboard widgets</h4><p>Linked dashboards with charts, summary widgets, and KPIs — wired to the board data automatically.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="index.html" class="nav-brand"><div class="ok-logo" style="width:34px;height:34px;"><svg viewBox="0 0 42 42" fill="none"><ellipse cx="21" cy="21" rx="19" ry="9" stroke="#FF6B2C" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.6"/><circle cx="21" cy="21" r="6" fill="url(#pgf)"/><circle cx="38" cy="21" r="2.8" fill="#FF6B2C"/><path d="M19 19.5h4M21 18v6" stroke="white" stroke-width="1.2" stroke-linecap="round"/><defs><radialGradient id="pgf" cx="40%" cy="35%"><stop offset="0%" stop-color="#FF8C54"/><stop offset="100%" stop-color="#CC4A14"/></radialGradient></defs></svg></div><div class="brand-text"><span class="brand-name">Orbit<span class="accent">Kit</span></span><span class="brand-sub">monday.com toolkit</span></div></a><p>The monday.com toolkit for teams in orbit.</p></div>
+      <div class="footer-col"><h5>Products</h5><ul><li><a href="apps.html">Apps</a></li><li><a href="templates.html">Templates</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog.html">Blog</a></li><li><a href="consulting.html">Consulting</a></li><li><a href="support.html">Support</a></li></ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 OrbitKit · The Ideal Monday Development</span><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Contact</a></div></div>
+  </div>
+</footer>
+</div>
+<script src="orbit.js"></script>
+</body>
+</html>
